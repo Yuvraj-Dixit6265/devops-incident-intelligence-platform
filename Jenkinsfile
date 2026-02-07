@@ -10,13 +10,19 @@ pipeline {
             }
         }
 
+        stage('Security Scan - Secrets') {
+            steps {
+                sh 'python devsecops/secret_scan.py'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t devops-incident-intelligence:ci .'
             }
         }
 
-        stage('Run Incident Intelligence Platform') {
+        stage('Run Platform') {
             steps {
                 sh 'docker run --rm devops-incident-intelligence:ci'
             }
