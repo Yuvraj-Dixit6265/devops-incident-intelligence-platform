@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-oom-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-oom-app
+  template:
+    metadata:
+      labels:
+        app: demo-oom-app
+    spec:
+      containers:
+      - name: demo-oom
+        image: demo-oom-app:1.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "50Mi"
