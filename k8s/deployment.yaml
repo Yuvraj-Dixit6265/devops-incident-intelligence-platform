@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: incident-intelligence
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: incident-intelligence
+  template:
+    metadata:
+      labels:
+        app: incident-intelligence
+    spec:
+      containers:
+      - name: incident-engine
+        image: devops-incident-intelligence:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
